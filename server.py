@@ -1,6 +1,6 @@
 import shutil
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, BackgroundTasks
 
 from thumbnail_resizer import image_to_thumbnail
 
@@ -14,9 +14,11 @@ async def root():
 
 
 @app.post('/thumbnail/')
-async def resize_image(image: UploadFile = File(...)):
+async def resize_image(background_tasks: BackgroundTasks, image: UploadFile = File(...)):
 
     with open('destination.jpg', 'wb') as buffer:
         shutil.copyfileobj(image.file, buffer)
+
+    background_tasks.add_task(image_to_thumbnail, image.file)
 
     return {'filename': image.filename}
