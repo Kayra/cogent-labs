@@ -1,9 +1,13 @@
+from typing import Union, List
+
 from PIL import Image
 
 
+def image_to_thumbnail(image_location: str, size: Union[List, None] = None) -> None:
 
-size = 100, 100
+    if not size:
+        size = 100, 100
 
-image = Image.open('example_image.jpg')
-resized_image = image.resize(size)
-resized_image.save('thumbnail.jpg')
+    image = Image.open(image_location)
+    resized_image = image.resize(size)
+    resized_image.save('thumbnail.jpg')
