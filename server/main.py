@@ -20,7 +20,7 @@ async def root():
 @app.post('/thumbnail/', status_code=202)
 async def resize_image(request: Request, background_tasks: BackgroundTasks, image: UploadFile = File(...)):
 
-    if not is_valid_image(image, VALID_IMAGE_EXTENSIONS):
+    if not is_valid_image(image.file, image.filename, VALID_IMAGE_EXTENSIONS):
         return JSONResponse(status_code=400,
                             content={"Error": f"Image is not valid. Please ensure extension and file is of one of the following formats: {VALID_IMAGE_EXTENSIONS}"})
 
@@ -31,7 +31,7 @@ async def resize_image(request: Request, background_tasks: BackgroundTasks, imag
 
     thumbnail_url = os.path.join(str(request.url), thumbnail_name)
 
-    return {'filename': thumbnail_url}
+    return {'Resized image URL': thumbnail_url}
 
 
 @app.get('/thumbnail/{thumbnail_name}', status_code=200)

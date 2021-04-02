@@ -9,21 +9,18 @@ from server.thumbnail_resizer import image_to_thumbnail
 
 class TestImageToThumbnail:
 
-    def test_image_to_thumbnail_valid_image(self):
+    def test_image_to_thumbnail_valid_image(self, test_image_file):
 
-        file = BytesIO()
-        image = Image.new('RGBA', size=(150, 150), color=(155, 0, 0))
-        image.save(file, 'png')
-        file.name = 'test.png'
-        file.seek(0)
-        file_location = f'server/tests/{file.name}'
+        test_image_file.seek(0)
+        file_location = f'server/tests/{test_image_file.name}'
 
-        image_to_thumbnail(file, file_location)
+        image_to_thumbnail(test_image_file, file_location)
 
         resized_image = Image.open(file_location)
         assert resized_image.size == (100, 100)
 
         os.remove(file_location)
+        test_image_file.close()
 
     def test_image_to_thumbnail_invalid_image(self):
 
