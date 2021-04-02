@@ -1,13 +1,14 @@
 from typing import Union, List
+from tempfile import SpooledTemporaryFile
 
 from PIL import Image
 
 
-def image_to_thumbnail(image_location: str, size: Union[List, None] = None) -> None:
+def image_to_thumbnail(image: Union[str, SpooledTemporaryFile], thumbnail_name: str, size: Union[List, None] = None) -> None:
 
     if not size:
         size = 100, 100
 
-    image = Image.open(image_location)
-    resized_image = image.resize(size)
-    resized_image.save('thumbnail.jpg')
+    image_file = Image.open(image)
+    resized_image = image_file.resize(size)
+    resized_image.save(thumbnail_name)
