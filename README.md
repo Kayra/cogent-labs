@@ -2,6 +2,7 @@
 Install app:
 
 ```bash
+cd server
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -10,6 +11,7 @@ pip install -r requirements.txt
 Run server:
 
 ```bash
+cd server
 uvicorn server:app --reload
 ```
 
