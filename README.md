@@ -15,6 +15,11 @@ cd server
 uvicorn server:app --reload
 ```
 
+Run server tests:
+
+```bash
+pytest server/tests/ -p no:warnings -vv
+```
 
 Upload image:
 
@@ -31,3 +36,4 @@ Get image:
 curl -O --request GET \
   --url http://127.0.0.1:8000/thumbnail/f52896c1-8833-4a1e-b84e-ba4c9dfa1c15.jpg
 ```
+
