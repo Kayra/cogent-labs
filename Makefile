@@ -1,4 +1,4 @@
-.PHONY: install start restart database dotenv servershell psqlshell testunit testinteg teste2e testall
+.PHONY: start test send-image
 
 
 start:
