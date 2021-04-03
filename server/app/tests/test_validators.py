@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from server.validators import is_valid_image
+from app.validators import is_valid_image
 
 
 VALID_IMAGE_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')

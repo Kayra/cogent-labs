@@ -4,7 +4,7 @@ from io import BytesIO
 import pytest
 from PIL import Image, UnidentifiedImageError
 
-from server.thumbnail_resizer import image_to_thumbnail
+from app.thumbnail_resizer import image_to_thumbnail
 
 
 class TestImageToThumbnail:
@@ -12,7 +12,7 @@ class TestImageToThumbnail:
     def test_image_to_thumbnail_valid_image(self, test_image_file):
 
         test_image_file.seek(0)
-        file_location = f'server/tests/{test_image_file.name}'
+        file_location = test_image_file.name
 
         image_to_thumbnail(test_image_file, file_location)
 

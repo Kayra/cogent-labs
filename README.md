@@ -37,3 +37,15 @@ curl -O --request GET \
   --url http://127.0.0.1:8000/thumbnail/f52896c1-8833-4a1e-b84e-ba4c9dfa1c15.jpg
 ```
 
+
+Build and start server:
+
+```bash
+docker-compose up
+```
+
+Run tests in docker container:
+
+```bash
+docker exec -it cogent.server pytest tests/ -p no:warnings -vv
+```
