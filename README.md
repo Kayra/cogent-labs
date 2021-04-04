@@ -41,11 +41,23 @@ curl -O --request GET \
 Build and start server:
 
 ```bash
-docker-compose up
+make start
 ```
 
 Run tests in docker container:
 
 ```bash
-docker exec -it cogent.server pytest tests/ -p no:warnings -vv
+make test
+```
+
+Send image to fast view:
+
+```bash
+make send-image-fast
+```
+
+Send image to queue view:
+
+```bash
+make send-image-queue
 ```
