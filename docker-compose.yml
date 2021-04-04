@@ -19,7 +19,7 @@ services:
     build: ./server
     volumes:
       - ./server/app:/app
-    entrypoint: celery --app=worker.celery_app worker -c 2 --loglevel=debug
+    entrypoint: celery --app=workers.celery_main.celery_app worker -c 2 --loglevel=debug
     depends_on:
       - rabbit
       - redis

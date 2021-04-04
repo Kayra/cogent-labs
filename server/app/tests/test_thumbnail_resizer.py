@@ -4,7 +4,7 @@ from io import BytesIO
 import pytest
 from PIL import Image, UnidentifiedImageError
 
-from app.worker import image_to_thumbnail
+from app.workers.tasks import image_to_thumbnail
 
 
 class TestImageToThumbnail:

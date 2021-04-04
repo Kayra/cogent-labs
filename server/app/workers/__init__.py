@@ -1,0 +1,1 @@
+from workers.tasks import image_to_thumbnail

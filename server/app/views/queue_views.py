@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi import File, UploadFile, Request, APIRouter
 
 from validators import is_valid_image
-from worker import image_to_thumbnail
+from workers.tasks import image_to_thumbnail
 
 
 router = APIRouter()
