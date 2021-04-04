@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   server:
     container_name: cogent.server
     build: ./server
@@ -12,3 +13,21 @@ services:
     environment:
       - ENVIRONMENT=dev
       - TESTING=0
+
+  worker:
+    container_name: cogent.celery
+    build: ./server
+    volumes:
+      - ./server/app:/app
+    entrypoint: celery --app=worker.celery_app worker -c 2 --loglevel=debug
+    depends_on:
+      - rabbit
+      - redis
+
+  rabbit:
+    container_name: cogent.rabbit
+    image: rabbitmq:latest
+
+  redis:
+    container_name: cogent.redis
+    image: redis:latest
