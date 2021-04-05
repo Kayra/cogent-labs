@@ -19,7 +19,7 @@ def save_file(file, file_location):
 
 
 @router.post('/thumbnails/', status_code=202)
-async def resize_image_queue(request: Request, background_tasks: BackgroundTasks, image: UploadFile = File(...)):
+async def resize_image_to_thumbnail(request: Request, background_tasks: BackgroundTasks, image: UploadFile = File(...)):
 
     from main import VALID_IMAGE_EXTENSIONS, STATIC_FILE_LOCATION
     if not is_valid_image(image.file, image.filename, VALID_IMAGE_EXTENSIONS):
@@ -41,12 +41,16 @@ async def resize_image_queue(request: Request, background_tasks: BackgroundTasks
 
 
 @router.get('/thumbnails/{thumbnail_name}', status_code=200)
-async def return_resized_image_queue(thumbnail_name: str):
+async def return_thumbnail(thumbnail_name: str):
 
+    from main import STATIC_FILE_LOCATION
     thumbnail_id = os.path.splitext(thumbnail_name)[0]
+    thumbnail_location = os.path.join(STATIC_FILE_LOCATION, thumbnail_name)
     result_status = AsyncResult(thumbnail_id).status
 
-    if result_status == 'SUCCESS':
-        return FileResponse(thumbnail_name)
-    else:
+    if result_status == 'SUCCESS' and os.path.isfile(thumbnail_location):
+        return FileResponse(thumbnail_location)
+    elif not os.path.isfile(thumbnail_location):
+        return JSONResponse(status_code=404, content={"Error": f"Image {thumbnail_name} not found."})
+    elif not result_status == 'SUCCESS':
         return JSONResponse(status_code=409, content={"Processing": f"Current status of image processing is {result_status}."})
