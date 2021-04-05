@@ -1,7 +1,9 @@
 from typing import Union, List
 
-from PIL import Image
+from PIL import Image, ImageFile
 from workers.celery_main import celery_app
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 @celery_app.task

@@ -15,10 +15,10 @@ cd server
 uvicorn server:app --reload
 ```
 
-Run server tests:
+Run server unit_tests:
 
 ```bash
-pytest server/tests/ -p no:warnings -vv
+pytest server/unit_tests/ -p no:warnings -vv
 ```
 
 Upload image:
@@ -44,10 +44,16 @@ Build and start server:
 make start
 ```
 
-Run tests in docker container:
+Run unit tests in docker container:
 
 ```bash
-make test
+make unit-test
+```
+
+Run integration tests in docker container:
+
+```bash
+make integration-test
 ```
 
 Send image to fast view:

@@ -5,8 +5,8 @@ start:
 	@docker-compose up
 
 
-test:
-	@docker exec -it cogent.server pytest tests/ -p no:warnings -vv
+unit-test:
+	@docker exec -it cogent.server pytest unit_tests/ -p no:warnings -vv
 
 
 send-image-fast:

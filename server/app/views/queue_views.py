@@ -1,10 +1,9 @@
 import os
 import uuid
-import aiofiles
 
 from celery.result import AsyncResult
 from fastapi.responses import FileResponse, JSONResponse
-from fastapi import File, UploadFile, Request, APIRouter
+from fastapi import File, UploadFile, Request, APIRouter, BackgroundTasks
 
 from validators import is_valid_image
 from workers.tasks import image_to_thumbnail
@@ -13,8 +12,14 @@ from workers.tasks import image_to_thumbnail
 router = APIRouter()
 
 
+def save_file(file, file_location):
+    with open(file_location, 'wb') as out_file:
+        while content := file.read(1024):
+            out_file.write(content)
+
+
 @router.post('/thumbnail-queue/', status_code=202)
-async def resize_image_queue(request: Request, image: UploadFile = File(...)):
+async def resize_image_queue(request: Request, background_tasks: BackgroundTasks, image: UploadFile = File(...)):
 
     from main import VALID_IMAGE_EXTENSIONS, STATIC_FILE_LOCATION
     if not is_valid_image(image.file, image.filename, VALID_IMAGE_EXTENSIONS):
@@ -26,9 +31,7 @@ async def resize_image_queue(request: Request, image: UploadFile = File(...)):
     thumbnail_name = thumbnail_id + image_extension
     file_location = os.path.join(STATIC_FILE_LOCATION, thumbnail_name)
 
-    async with aiofiles.open(file_location, 'wb') as out_file:
-        while content := await image.read(1024):
-            await out_file.write(content)
+    background_tasks.add_task(save_file, image.file, file_location)
 
     image_to_thumbnail.apply_async(args=[file_location, thumbnail_name], task_id=thumbnail_id)
 
