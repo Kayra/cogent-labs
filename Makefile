@@ -1,12 +1,16 @@
-.PHONY: start unit-test send-image
+.PHONY: start unit-tests integration-tests send-image
 
 
 start:
 	@docker-compose up
 
 
-unit-test:
-	@docker exec -it cogent.server pytest unit_tests/ -p no:warnings -vv
+unit-tests:
+	@docker exec -it cogent.server pytest tests/unit_tests/ -p no:warnings -vv
+
+
+integration-tests:
+	@docker exec -it cogent.server pytest tests/integration_tests/ -p no:warnings -vv
 
 
 send-image:
