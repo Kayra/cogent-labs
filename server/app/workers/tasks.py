@@ -1,12 +1,10 @@
 from typing import Union, List
 
-from PIL import Image, ImageFile
+from PIL import Image
 from workers.celery_main import celery_app
 
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-
-@celery_app.task
+@celery_app.task(autoretry_for=(OSError,), default_retry_delay=1)
 def image_to_thumbnail(image_location: str, thumbnail_name: str, size: Union[List, None] = None) -> None:
 
     if not size:

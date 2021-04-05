@@ -2,8 +2,7 @@ import os
 
 from fastapi import FastAPI
 
-from views.fast_views import router as fast_views_router
-from views.queue_views import router as queue_views_router
+from views.thumbnail_views import router as thumbnail_views_router
 
 
 app = FastAPI()
@@ -16,5 +15,4 @@ async def root():
     return {'message': 'Hello Cogent'}
 
 
-app.include_router(fast_views_router)
-app.include_router(queue_views_router)
+app.include_router(thumbnail_views_router)
