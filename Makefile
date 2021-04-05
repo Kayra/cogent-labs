@@ -11,6 +11,6 @@ unit-test:
 
 send-image:
 	@curl --request POST \
-     --url http://127.0.0.1:8000/thumbnail/ \
+     --url http://127.0.0.1:8000/thumbnails/ \
      --header 'Content-Type: multipart/form-data' \
      --form image=@example_image.jpg

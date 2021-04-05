@@ -18,7 +18,7 @@ def save_file(file, file_location):
             out_file.write(content)
 
 
-@router.post('/thumbnail/', status_code=202)
+@router.post('/thumbnails/', status_code=202)
 async def resize_image_queue(request: Request, background_tasks: BackgroundTasks, image: UploadFile = File(...)):
 
     from main import VALID_IMAGE_EXTENSIONS, STATIC_FILE_LOCATION
@@ -40,7 +40,7 @@ async def resize_image_queue(request: Request, background_tasks: BackgroundTasks
     return {'Resized image URL': thumbnail_url}
 
 
-@router.get('/thumbnail/{thumbnail_name}', status_code=200)
+@router.get('/thumbnails/{thumbnail_name}', status_code=200)
 async def return_resized_image_queue(thumbnail_name: str):
 
     thumbnail_id = os.path.splitext(thumbnail_name)[0]
