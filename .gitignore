@@ -1,5 +1,6 @@
 .DS_Store
 .idea/
 *.jpg
+*.jpeg
 venv/
 __pycache__/

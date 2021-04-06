@@ -46,11 +46,12 @@ async def return_thumbnail(thumbnail_name: str):
     from main import STATIC_FILE_LOCATION
     thumbnail_id = os.path.splitext(thumbnail_name)[0]
     thumbnail_location = os.path.join(STATIC_FILE_LOCATION, thumbnail_name)
+    thumbnail_extension = thumbnail_location.split('.')[1]
 
     result_status = AsyncResult(thumbnail_id).status
 
     if result_status == 'SUCCESS' and os.path.isfile(thumbnail_location):
-        return FileResponse(thumbnail_location)
+        return FileResponse(thumbnail_location, media_type=f'image/{thumbnail_extension}')
     elif not os.path.isfile(thumbnail_location):
         return JSONResponse(status_code=404, content={"Error": f"Image {thumbnail_name} not found."})
     elif not result_status == 'SUCCESS':
