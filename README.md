@@ -36,13 +36,13 @@ curl -O --request GET \
 Run unit tests **(while the server is running)**:
 
 ```bash
-make unit-test
+make unit-tests
 ```
 
 Run the integration tests **(while the server is running)**:
 
 ```bash
-make integration-test
+make integration-tests
 ```
 
 ## System Design
@@ -103,7 +103,7 @@ The [Fastapi](https://fastapi.tiangolo.com) framework was chosen for the **API**
 
 #### Polling vs [Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/)
 
-It is possible to implement a similar thumbnail polling solution using Fastapi's asynchronous Background Tasks, making the system much simpler, speeding up development time, and requiring less maintenance.
+It is possible to implement a similar thumbnail polling solution using Fastapi's asynchronous Background Tasks instead of a **Worker** service (Celery, RabbitMQ, Redis), making the system much simpler, speeding up development time, and requiring less maintenance.
 
 However, in context of being assessed on the skills required to implement more technical and realistic polling solutions, Background Tasks would have not adequately demonstrated my decision making process and technical ability. 
 
@@ -145,7 +145,7 @@ While it would be tempting to merge the API of this service with the orchestrati
 
 Additionally, the API can be changed from REST to a messaging platform like Kafka relatively easily if required for integration with a larger system.
 
-##### Cloud Platform
+##### Cloud Platform Configuration
 
 The application would need to be more specifically configured to suit the platform it was being deployed on. This would likely mean setting the application up based on variables set by a provisioning service exposed in the environment that are then accessed via Python's `os.getenv`.
 
