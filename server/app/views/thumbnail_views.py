@@ -46,6 +46,7 @@ async def return_thumbnail(thumbnail_name: str):
     from main import STATIC_FILE_LOCATION
     thumbnail_id = os.path.splitext(thumbnail_name)[0]
     thumbnail_location = os.path.join(STATIC_FILE_LOCATION, thumbnail_name)
+
     result_status = AsyncResult(thumbnail_id).status
 
     if result_status == 'SUCCESS' and os.path.isfile(thumbnail_location):
