@@ -30,7 +30,7 @@ To retrieve the resized thumbnail, visit the URL provided in the successful resp
 
 ```bash
 curl -O --request GET \
-  --url http://127.0.0.1:8000/thumbnail/<image_filename>
+  --url http://127.0.0.1:8000/thumbnails/<image_filename>
 ```
 
 Run unit tests **(while the server is running)**:
