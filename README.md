@@ -169,8 +169,8 @@ The current [integration tests](server/app/tests/integration_tests/test_thumbnai
 
 * `test_request_pending_image` tests that a pending status is returned while the image resize process is still being completed. Currently this is achieved by generating a large image to process, and can be changed depending on the requirements of the circumstances:
   * If the tests need to pass more often, the size of the generated image could be increased further at the cost of the test run time.
-  * If the tests need to pass more quickly, the size of the generated image could be increased, at the cost of the tests sometimes failing if the server processes the image before the status request can be made.
-* `test_request_valid_image` tests that an image submitted to the application is appropriated resized to 100x100px. As part of this test, the `/thumbnails/<image_name>` is polled with a delay of 1 second between each request, this can changed depending on the requirements of the circumstances:
+  * If the tests need to pass more quickly, the size of the generated image could be reduced, at the cost of the tests sometimes failing if the server processes the image before the status request can be made.
+* `test_request_valid_image` tests that an image submitted to the application is appropriately resized to 100x100px. As part of this test, the `/thumbnails/<image_name>` is polled with a delay of 1 second between each request, this can changed depending on the requirements of the circumstances:
   * If the tests need to pass more often, the delay can be increased so the development server is not overwhelmed at the cost of the test run time.
   * If the tests need to pass more quickly, the delay can be reduced, at the cost of the tests sometimes failing if the server is overwhelmed.
 
@@ -194,4 +194,5 @@ The current [integration tests](server/app/tests/integration_tests/test_thumbnai
   * This could also prompt the client for mid process decisions for more complex workflows.
 * Authentication for both making the request and downloading the image:
   * User client authentication via account persistence, sign in and JWT for access.
-  *  key authentication for system clients.
+  * Key authentication for system clients.
+  
