@@ -26,6 +26,8 @@ Additionally, the OpenAPI documentation can be accessed at http://127.0.0.1:8000
 
 ### Using the application
 
+#### `/thumbnails` endpoint
+
 Send an [image](example_image.jpeg) **(while the server is running)**:
 
 ```
@@ -40,6 +42,8 @@ curl --request POST \
      --header 'Content-Type: multipart/form-data' \
      --form image=@example_image.jpeg
 ```
+
+#### `/thumbnails/<image_name>` endpoint
 
 To retrieve the resized thumbnail, visit the URL provided in the successful response of the `make send-image` request to the API. Alternatively, send the following curl request using the image filename provided in the API response **(while the server is running)**:
 
