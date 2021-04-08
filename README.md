@@ -142,7 +142,7 @@ Under the correct conditions, a Web Hook solution would often be my personal pre
 
 A Web Socket solution would have required keeping a connection open between the **Client** and **API** for a considerable amount of time, in exchange for a real time dynamic information exchange.
 
-Because the  did not define any requirement for dynamic progress updates, or a need for the Client to be made aware as soon as the process was complete, a Web Socket solution would have consumed more server resource than necessary for little benefit.
+Because the specification did not define any requirement for dynamic progress updates, or a need for the Client to be made aware as soon as the process was complete, a Web Socket solution would have consumed more server resource than necessary for little benefit.
 
 #### Non-blocking `/thumbnails` POST endpoint
 
@@ -184,7 +184,7 @@ Image retention time would need to be established, potentially with the third pa
 
 Additionally the service would need to communicate via HTTPS, and it is likely a robust authentication system would need to be implemented for any feature requiring authorisation (see Additional Feature Development Ideas).
 
-#### Testing
+### Testing
 
 While unit tests and integration tests are currently in place, it would be possible to increase the number of tests to more exhaustively capture potential use cases and errors (for example integration testing for endpoint validation). However, doing so would make the system less flexible to change and potentially slow down future development, and would need to be implemented with a clear vision for the future of the application.
 
