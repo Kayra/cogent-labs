@@ -147,7 +147,11 @@ Additionally, the API can be changed from REST to a messaging platform like Kafk
 
 ##### Cloud Platform Configuration
 
-The application would need to be more specifically configured to suit the platform it was being deployed on. This would likely mean setting the application up based on variables set by a provisioning service exposed in the environment that are then accessed via Python's `os.getenv`.
+The application would need to be more specifically configured to suit the platform it was being deployed on. This would likely mean setting the application up based on variables set by a provisioning service exposed in the environment that are then accessed via Python's `os.getenv`. Different configuration files for local development, CI/CD testing, development clusters, and production clusters would then allow the application to be set up easily and robustly depending on the purpose.
+
+##### Scaling
+
+While the asynchronous nature of Celery supports high availability and horizontal scaling, [Ray Serve](https://docs.ray.io/en/master/serve/) can also be used to achieve 100+ CPU clusters and is [specially geared towards serving machine learning models](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786). This may be more appropriate for an application that serves ML models. More knowledge of a potential application and prototype profiling would be needed to decide on the most appropriate solution.
 
 ##### Rate Limiting
 
@@ -161,7 +165,7 @@ Additionally the service would need to communicate via HTTPS, and it is likely a
 
 #### Testing
 
-While unit tests and integration tests are currently in place, it would be possible to increase the number of tests to more exhaustively capture potential use cases and errors. Doing so would make the system less flexible to change and potentially slow down future development, and would need to be implemented with a clear vision for the future of the application.
+While unit tests and integration tests are currently in place, it would be possible to increase the number of tests to more exhaustively capture potential use cases and errors (for example integration testing for endpoint validation). However, doing so would make the system less flexible to change and potentially slow down future development, and would need to be implemented with a clear vision for the future of the application.
 
 It would be essential to create end-to-end tests if this application were to be integrated into a larger system. In its current form, the integration tests can also be considered end-to-end tests.
 
@@ -184,7 +188,7 @@ The current [integration tests](server/app/tests/integration_tests/test_thumbnai
 
 ## Additional Feature Development Ideas
 
-* Image resizer could maintain the aspect ratio by using cropping in the process of creating the thumbnail.
+* Image resizer to maintain the aspect ratio by using cropping in the process of creating the thumbnail.
 * Ability for the client to determine the size of the thumbnail via the API.
 * Ability for the client to cancel the resize request mid process via the API.
 * Multi-file upload endpoint exposed by the API.

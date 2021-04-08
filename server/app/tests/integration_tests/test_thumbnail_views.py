@@ -20,7 +20,7 @@ class TestResizeImageToThumbnailView:
         response = requests.post(self.thumbnail_view_endpoint, files={'image': test_image_file})
 
         assert response.status_code == 202
-        assert 'Resized image URL' in response.json()
+        assert 'resized_image_url' in response.json()
 
     def test_post_invalid_image(self):
 
@@ -29,7 +29,7 @@ class TestResizeImageToThumbnailView:
         response = requests.post(self.thumbnail_view_endpoint, files={'image': bad_file})
 
         assert response.status_code == 400
-        assert 'Error' in response.json()
+        assert 'error' in response.json()
 
     @classmethod
     def teardown_class(cls):
@@ -46,7 +46,7 @@ class TestReturnThumbnailView:
 
         test_image_file.seek(0)
         resize_response = requests.post(self.thumbnail_view_endpoint, files={'image': test_image_file})
-        image_name = resize_response.json()['Resized image URL'].split('/')[-1]
+        image_name = resize_response.json()['resized_image_url'].split('/')[-1]
 
         resized_image_url = os.path.join(self.thumbnail_view_endpoint, image_name)
         image_response = requests.get(resized_image_url)
@@ -67,7 +67,7 @@ class TestReturnThumbnailView:
         image_response = requests.get(resized_image_url)
 
         assert image_response.status_code == 404
-        assert 'Error' in image_response.json()
+        assert 'error' in image_response.json()
 
     def test_request_pending_image(self):
 
@@ -78,14 +78,14 @@ class TestReturnThumbnailView:
         test_image_file.seek(0)
 
         resize_response = requests.post(self.thumbnail_view_endpoint, files={'image': test_image_file})
-        image_name = resize_response.json()['Resized image URL'].split('/')[-1]
+        image_name = resize_response.json()['resized_image_url'].split('/')[-1]
 
         resized_image_url = os.path.join(self.thumbnail_view_endpoint, image_name)
         image_response = requests.get(resized_image_url)
 
         assert image_response.status_code == 409
-        assert 'Processing' in image_response.json()
-        assert any([status in image_response.json()['Processing'] for status in ['PENDING', 'RETRY']])
+        assert 'processing' in image_response.json()
+        assert any([status in image_response.json()['processing'] for status in ['PENDING', 'RETRY']])
 
     @classmethod
     def teardown_class(cls):
