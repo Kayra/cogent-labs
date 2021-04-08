@@ -89,7 +89,7 @@ Though data validation has been implemented, for simplicity the described data f
 
 ### Implemented Technologies
 
-The **API** and **Worker** services are built using [Python 3.8](https://www.python.org/downloads/release/python-380/). 
+The **API** and **Worker** services were built using [Python 3.8](https://www.python.org/downloads/release/python-380/). The resizing task was built using the [Pillow](https://python-pillow.org) framework for convenience.
 
 The [Fastapi](https://fastapi.tiangolo.com) framework was chosen for the **API** service for its asynchronous properties and high performance, lack of boilerplate, and relevant features (REST helpers and auto generated documentation).
 
