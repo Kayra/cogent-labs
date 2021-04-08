@@ -20,7 +20,9 @@ Build and start server (the same as running `docker-compose up`):
 make start
 ```
 
-Once the server has been started, it will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/). **Please ensure this host and port are not being used before starting the application.** Additionally, the OpenAPI documentation can be accessed at http://127.0.0.1:8000/docs.
+Once the server has been started, it will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/). **Please ensure this host and port are not being used before starting the application.** 
+
+Additionally, the OpenAPI documentation can be accessed at http://127.0.0.1:8000/docs.
 
 ### Using the application
 
@@ -28,6 +30,15 @@ Send an [image](example_image.jpeg) **(while the server is running)**:
 
 ```
 make send-image
+```
+
+You can also send an image using curl:
+
+```bash
+curl --request POST \
+     --url http://127.0.0.1:8000/thumbnails/ \
+     --header 'Content-Type: multipart/form-data' \
+     --form image=@example_image.jpeg
 ```
 
 To retrieve the resized thumbnail, visit the URL provided in the successful response of the `make send-image` request to the API. Alternatively, send the following curl request using the image filename provided in the API response **(while the server is running)**:
