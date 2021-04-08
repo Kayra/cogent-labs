@@ -14,7 +14,7 @@ System requirements:
 
 ### Installing the application
 
-Build and start server:
+Build and start server (the same as running `docker-compose up`:
 
 ```
 make start
