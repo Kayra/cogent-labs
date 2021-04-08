@@ -20,7 +20,7 @@ make start
 
 Once the server has been started, it will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/). **Please ensure this host and port are not being used before starting the application.** Additionally, the OpenAPI documentation can be accessed at http://127.0.0.1:8000/docs.
 
-Send an [image](example_image.jpg) **(while the server is running)**:
+Send an [image](example_image.jpeg) **(while the server is running)**:
 
 ```
 make send-image
