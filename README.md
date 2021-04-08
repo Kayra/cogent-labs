@@ -12,6 +12,8 @@ System requirements:
 
 **A [Makefile](Makefile) has been included for your convenience, please be sure to refer to it if you wish to customise the commands.** Simply omit the '@' symbol at the start of the command and copy and paste it into bash for the same outcome.
 
+### Installing the application
+
 Build and start server:
 
 ```
@@ -19,6 +21,8 @@ make start
 ```
 
 Once the server has been started, it will be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/). **Please ensure this host and port are not being used before starting the application.** Additionally, the OpenAPI documentation can be accessed at http://127.0.0.1:8000/docs.
+
+### Using the application
 
 Send an [image](example_image.jpeg) **(while the server is running)**:
 
@@ -32,6 +36,8 @@ To retrieve the resized thumbnail, visit the URL provided in the successful resp
 curl -O --request GET \
   --url http://127.0.0.1:8000/thumbnails/<image_filename>
 ```
+
+### Testing the application
 
 Run unit tests **(while the server is running)**:
 
