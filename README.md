@@ -98,7 +98,7 @@ Though data validation has been implemented, for simplicity the described data f
 
 #### Thumbnail or Processing Status Response
 
-1. The **Client** makes a POST request to the `/thumbnails/<image_name>` endpoint of the **API**.
+1. The **Client** makes a GET request to the `/thumbnails/<image_name>` endpoint of the **API**.
 
 2. The **API** checks if the thumbnail exists in the **File Store**:
 
